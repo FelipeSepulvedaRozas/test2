@@ -6,23 +6,6 @@ def menuprincipal
   puts 'Ingrese 4) para salir'
 end
 
-
-def txtnotas
-  file = File.open('alumnos.csv', 'r')
-  data = file.readlines
-  file.close
-  data
-end
-
-def txtpromedio
-  file = File.open('promedio.csv', 'r')
-  data =cd  file.readlines
-  file.close
-  data
-end
-
-
-
 loop do |option|
   menuprincipal
   option = gets.chomp
@@ -32,7 +15,7 @@ loop do |option|
        puts "Promedio por alumno"
     promedio = []
     lines = []
-    File.open('alumnos.csv','r'){|file| lines = file.readlines }
+    File.open('alumnos.csv','r'){|file| lines = file.readlines}
      promedio= File.open('Promedios.csv','w') 
     lines.each do |value|
         sum = 0
@@ -50,7 +33,7 @@ loop do |option|
   when 2
     puts 'Cantidad de Ausencias por alumno'
     lines =[]
-    File.open('alumnos.csv','r'){|file| lines = file.readlines }
+    File.open('alumnos.csv','r'){|file| lines = file.readlines}
     lines.each do |value|
       countA = 0
       asistencia = value.split(', ').map(&:chomp)
@@ -60,7 +43,13 @@ loop do |option|
 
     end
   when 3
-    puts 'aprobados'
+    puts 'Los alumnos Aprobados son:'
+    lines = []
+    File.open('Promedios.csv','r'){|file| lines =file.readlines}
+    lines.each do |value|
+      promedio = value.split(':') 
+      puts "#{promedio[0]}:#{promedio[1]}" if promedio [1].to_f >= 5
+    end
   when 4
     break
   else
