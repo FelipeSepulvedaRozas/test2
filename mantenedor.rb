@@ -29,20 +29,24 @@ loop do |option|
   case option.to_i
     
   when 1
-    
-  
+       puts "Promedio por alumno"
+    promedio = []
     lines = []
     File.open('alumnos.csv','r'){|file| lines = file.readlines }
+     promedio= File.open('Promedios.csv','w') 
     lines.each do |value|
         sum = 0
     alumno = value.split(', ').map(&:chomp)
     alumno.each do |i|
+     
       sum += i.to_i if i.to_i.is_a? Integer
     end
-    puts "#{alumno[0]}:#{sum.to_f/(alumno.length - 1)}"
-  end
-  
+   promedio.puts "#{alumno[0]}:#{sum.to_f/(alumno.length - 1)}"
 
+   puts "#{alumno[0]}:#{sum.to_f/(alumno.length - 1)}"
+     
+  end
+  promedio.close 
   when 2
     puts 'Cantidad de Ausencias por alumno'
     lines =[]
@@ -50,8 +54,10 @@ loop do |option|
     lines.each do |value|
       countA = 0
       asistencia = value.split(', ').map(&:chomp)
+
       countA += asistencia.count('A')
-      puts "#{asistencia[0]}:#{countA}"
+    puts "#{asistencia[0]}:#{countA}"
+
     end
   when 3
     puts 'aprobados'
